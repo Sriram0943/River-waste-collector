@@ -1,0 +1,54 @@
+
+int in1=10;
+int in2=11;
+int in3=12;
+int in4=13;
+int relay=5;
+
+void setup() {
+  pinMode(relay,OUTPUT);
+  digitalWrite(relay,1);
+  pinMode(in1,OUTPUT);
+  pinMode(in2,OUTPUT);
+  pinMode(in3,OUTPUT);
+  pinMode(in4,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  while(Serial.available()){
+    String s=Serial.readString();
+    Serial.println(s);
+    if(s=="bo"){
+      digitalWrite(relay,0);
+    } else if(s=="bf"){
+      digitalWrite(relay,1);
+    }
+    if(s=="f"){
+      digitalWrite(in1,1);
+      digitalWrite(in2,0);
+      digitalWrite(in3,1);
+      digitalWrite(in4,0);
+    } else if(s=="b"){
+      digitalWrite(in1,0);
+      digitalWrite(in2,1);
+      digitalWrite(in3,0);
+      digitalWrite(in4,1);
+    } else if(s=="l") {
+      digitalWrite(in1,0);
+      digitalWrite(in2,0);
+      digitalWrite(in3,1);
+      digitalWrite(in4,0);
+    } else if(s=="r"){
+      digitalWrite(in1,1);
+      digitalWrite(in2,0);
+      digitalWrite(in3,0);
+      digitalWrite(in4,0);
+    } else {
+      digitalWrite(in1,0);
+      digitalWrite(in2,0);
+      digitalWrite(in3,0);
+      digitalWrite(in4,0);
+    }
+  }
+}
